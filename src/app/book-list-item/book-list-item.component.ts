@@ -5,7 +5,7 @@ import { Book } from '../shared/book';
   selector: 'book-list-item',
   imports: [],
   templateUrl: './book-list-item.component.html',
-  styleUrl: './book-list-item.component.css',
+  styleUrl: './  book-list-item.component.css',
 })
 export class BookListItemComponent {
   @Input() book?: Book;
