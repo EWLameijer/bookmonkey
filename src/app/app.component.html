@@ -1,4 +1,7 @@
 <main>
-  @if(book) {<bm-book-details [book]="book" (leave)="showList()" />} @else
-  {<bm-book-list (selectBook)="showDetails($event)" />}
+  @if (book) {
+    <bm-book-details [book]="book" (leave)="showList()" />
+  } @else {
+    <bm-book-list (selectBook)="showDetails($event)" />
+  }
 </main>

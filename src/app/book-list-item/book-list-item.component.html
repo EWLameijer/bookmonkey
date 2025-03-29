@@ -1,15 +1,17 @@
-@if(book) {
-<div class="list-item">
-  @if(book.thumbnailUrl) { <img [src]="book.thumbnailUrl" alt="Cover" />}
-  <h2>{{ book.title }}</h2>
-  @if (book.subtitle) {
-  <p role="doc-subtitle">{{ book.subtitle }}</p>
-  }
-  <ul class="comma-list">
-    @for (author of book.authors; track author) {
-    <li>{{ author }}</li>
+@if (book) {
+  <div class="list-item">
+    @if (book.thumbnailUrl) {
+      <img [src]="book.thumbnailUrl" alt="Cover" />
     }
-  </ul>
-  <div>ISBN {{ book.isbn }}</div>
-</div>
+    <h2>{{ book.title }}</h2>
+    @if (book.subtitle) {
+      <p role="doc-subtitle">{{ book.subtitle }}</p>
+    }
+    <ul class="comma-list">
+      @for (author of book.authors; track author) {
+        <li>{{ author }}</li>
+      }
+    </ul>
+    <div>ISBN {{ book.isbn }}</div>
+  </div>
 }

@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Book } from '../shared/book';
 
 @Component({
-  selector: 'book-list-item',
+  selector: 'bm-book-list-item',
   imports: [],
   templateUrl: './book-list-item.component.html',
-  styleUrl: './  book-list-item.component.css',
+  styleUrl: './book-list-item.component.css',
 })
 export class BookListItemComponent {
   @Input() book?: Book;
