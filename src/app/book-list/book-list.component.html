@@ -1,9 +1,8 @@
 <h1>Books</h1>
 <ul class="book-list">
   @for (book of books; track book.isbn) {
-    <bm-book-list-item [book]="book" (click)="doSelect(book)" />
-  }
-  @if (!books.length) {
+    <bm-book-list-item [book]="book" />
+  } @empty {
     <li>No books available.</li>
   }
 </ul>
