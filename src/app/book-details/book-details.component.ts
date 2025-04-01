@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Book } from '../shared/book';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
@@ -12,11 +12,7 @@ import { BookStoreService } from '../shared/book-store.service';
 export class BookDetailsComponent {
   book?: Book;
 
-  constructor(
-    route: ActivatedRoute,
-    bookService: BookStoreService,
-    private router: Router,
-  ) {
+  constructor(route: ActivatedRoute, bookService: BookStoreService) {
     const isbn = route.snapshot.paramMap.get('isbn');
     this.book = isbn ? bookService.getByISBN(isbn) : undefined;
   }
