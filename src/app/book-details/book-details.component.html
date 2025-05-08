@@ -1,4 +1,4 @@
-@if (book) {
+@if (book$ | async; as book) {
   <div class="details">
     <h1>{{ book.title }}</h1>
     @if (book.subtitle) {
@@ -30,5 +30,6 @@
       <img [src]="book.thumbnailUrl" alt="Cover" />
     }
     <a class="button" routerLink="..">Back to list</a>
+    <button class="red" (click)="removeBook(book.isbn)">Remove book</button>
   </div>
 }

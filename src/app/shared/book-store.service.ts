@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
+import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookStoreService {
-  readonly books: Book[] = [
-    {
-      isbn: '12345',
-      title: 'Tierisch gut kochen',
-      authors: ['Mrs Chimp', 'Mr Gorilla'],
-      published: '2022-06-20',
-      subtitle: 'Rezepte von Affe bis Zebra',
-      thumbnailUrl: 'https://cdn.ng-buch.de/kochen.png',
-      description: 'Immer lecker und gut',
-    },
-    {
-      isbn: '67890',
-      title: 'Backen mit Affen',
-      authors: ['Orang Utan'],
-      published: '2022-07-15',
-      subtitle: 'Bananenbrot und mehr',
-      thumbnailUrl: 'https://cdn.ng-buch.de/backen.png',
-      description: 'Tolle Backtipps für Mensch und Tier',
-    },
-  ];
+  private apiUrl = 'https://api5.angulrar-buch.com';
+  constructor(private http: HttpClient) {}
 
-  getAll(): Book[] {
-    return this.books;
+  getAll(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.apiUrl + '/books').pipe(
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      }),
+    );
   }
 
-  getByISBN(isbn: string): Book | undefined {
-    return this.books.find((book) => book.isbn === isbn);
+  getAllSearch(term: string): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.apiUrl}/books/search/${term}`).pipe(
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      }),
+    );
+  }
+
+  getByISBN(isbn: string): Observable<Book> {
+    return this.http.get<Book>(`${this.apiUrl}/books/${isbn}`);
+  }
+
+  remove(isbn: string): Observable<unknown> {
+    return this.http.delete<unknown>(`${this.apiUrl}/books/${isbn}`);
   }
 }
